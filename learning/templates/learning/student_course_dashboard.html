@@ -1,0 +1,20 @@
+{% extends 'learning/base.html' %}
+
+{% block content %}
+    <h2>Curso: {{ course.title }}</h2>
+
+    <h3>Unidades Disponibles:</h3>
+    <ul>
+        {% for unit in accessible_units %}
+            <li>
+                {{ unit.title }}
+                <!-- Link para acceder al panel de unidades -->
+                <a href="{% url 'learning:student_unit_dashboard' unit.id %}" class="btn btn-secondary">Acceder a unidad</a>
+            </li>
+        {% empty %}
+            <li>No hay unidades disponibles aún.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'learning:student_courses' %}">Volver a tus cursos</a>
+{% endblock %}

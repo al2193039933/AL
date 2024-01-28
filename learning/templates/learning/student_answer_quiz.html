@@ -1,0 +1,25 @@
+{% extends 'learning/base.html' %}
+{% load custom_filters %}
+
+{% block content %}
+<h2>Cuestionario para la unidad: {{ unit.title }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {% for question in questions %}
+        <div>
+            <p>{{ forloop.counter }}. {{ question.text }}</p>
+            {% for answer in randomized_answers|get_item:question.id %}
+                <label>
+                    <input type="radio" name="question_{{ question.id }}" value="{{ answer.id }}">
+                    {{ answer.text }}
+                </label><br>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <button type="submit">Subir cuestionario</button>
+</form>
+
+<a href="{% url 'learning:student_unit_dashboard' unit.id %}">Volver a unidad</a>
+
+{% endblock %}

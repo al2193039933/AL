@@ -1,0 +1,12 @@
+<!-- learning/templates/learning/login.html -->
+{% extends 'learning/base.html' %}
+
+{% block content %}
+<h2>Inicia sesión</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Entrar</button>
+</form>
+<p>¿Aún no tienes cuenta? <a href="{% url 'learning:register' %}">Regístrate aquí:</a>.</p>
+{% endblock %}

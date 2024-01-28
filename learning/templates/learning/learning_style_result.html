@@ -1,0 +1,9 @@
+<!-- learning_style_result.html -->
+
+{% extends 'learning/base.html' %}
+
+{% block content %}
+    <h2>Tu estilo de aprendizaje</h2>
+    <p>Tu estilo de aprendizaje determinado es: {{ learning_style.name }}</p>
+    <p>{{ learning_style.description }}</p>
+{% endblock %}

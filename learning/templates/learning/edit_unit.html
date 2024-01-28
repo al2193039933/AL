@@ -1,0 +1,43 @@
+{% extends 'learning/base.html' %}
+
+{% block content %}
+    <h2>Edit Unit</h2>
+
+    <!-- Formato apra editar detalles de unidad, incluyendo numero de secuencia -->
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar cambios</button>
+    </form>
+
+    <hr>
+
+    <h3>Materiales de Aprendizaje</h3>
+    {% for material in unit.materials.all %}
+        <div>
+            {{ material.learning_style.name }} - 
+            {% if material.file %}
+                Material Listo
+            {% else %}
+                No se ha subido un archivo
+            {% endif %}
+            <a href="{% url 'learning:edit_material' material.id %}">Editar</a>
+        </div>
+    {% empty %}
+        <p>Aún no se suben materiales.</p>
+    {% endfor %}
+    
+    {% if not all_materials_added %}
+        <a href="{% url 'learning:add_material' unit.id %}">Agregar Material</a>
+    {% endif %}
+
+    {% if quiz_exists %}
+        {% if quiz %}
+            <a href="{% url 'learning:edit_quiz_questions' quiz.id %}" class="btn btn-primary">Editar Cuestionario</a>
+        {% endif %}
+    {% else %}
+        <a href="{% url 'learning:create_quiz' unit.id %}" class="btn btn-primary">Crear Cuestionario</a>
+    {% endif %}
+
+    <a href="{% url 'learning:teacher_dashboard' %}">Volver al Panel</a>
+{% endblock %}

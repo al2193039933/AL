@@ -1,0 +1,27 @@
+<!-- learning/templates/learning/edit_course.html -->
+{% extends 'learning/base.html' %}
+
+{% block content %}
+    <h2>Editar curso: {{ course.title }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Actualizar curso</button>
+    </form>
+
+
+    <a href="{% url 'learning:enroll_students' course.id %}">Inscribe alumnos</a>
+
+
+<h3>Units</h3>
+<a href="{% url 'learning:create_unit' course.id %}">Crear Unidad</a>
+<ul>
+    {% for unit in course.units.all %}
+    <li>
+        {{ unit.title }} - <a href="{% url 'learning:edit_unit' unit.id %}">Editar</a>
+    </li>
+    {% empty %}
+    <li>No hay unidades disponibles.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

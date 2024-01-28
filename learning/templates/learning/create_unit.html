@@ -1,0 +1,12 @@
+<!-- learning/templates/learning/create_unit.html -->
+{% extends 'learning/base.html' %}
+
+{% block content %}
+    <h2>Añadir nueva unidad a: {{ course.title }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Agregar Unidad</button>
+    </form>
+    <a href="{% url 'learning:edit_course' course.id %}">Volver al Curso</a>
+{% endblock %}

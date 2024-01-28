@@ -1,0 +1,20 @@
+<!-- learning_style_quiz.html -->
+
+{% extends 'learning/base.html' %}
+
+{% block content %}
+    <h2>Determina tu estilo de aprendizaje</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for question in questions %}
+            <div>
+                <p>{{ question.text }}</p>
+                {% for answer in question.answers.all %}
+                    <input type="radio" name="question_{{ question.id }}" value="{{ answer.id }}" required>
+                    {{ answer.text }}<br>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <button type="submit">Entregar</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,16 @@
+<!-- learning/templates/learning/add_material.html -->
+{% extends 'learning/base.html' %}
+
+{% block content %}
+    {% if current_learning_style %}
+        <h2>Sube Material para: "{{ current_learning_style.name }}" in {{ unit.title }}</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Sube Material</button>
+        </form>
+    {% else %}
+        <p>Todos los estilos de aprendizaje para esta unidad tienen materiales subidos.</p>
+    {% endif %}
+    <a href="{% url 'learning:edit_unit' unit.id %}">Volver a la unidad</a>
+{% endblock %}

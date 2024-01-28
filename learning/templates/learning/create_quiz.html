@@ -1,0 +1,31 @@
+{% extends 'learning/base.html' %}
+
+{% block content %}
+    <h2>Crear Cuestionario para unidad: {{ unit.title }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <p>
+            {{ form.title.label_tag }}<br>
+            {{ form.title }}
+        </p>
+        <p>
+            {{ form.passing_score.label_tag }}<br>
+            {{ form.passing_score }}
+            <small>Nota: La puntuación de aprobación por defecto es 60.</small>
+        </p>
+        <p>
+            {{ form.num_questions_to_display.label_tag }}<br>
+            {{ form.num_questions_to_display }}
+            <small>Cantidad de preguntas a mostrar a los estudiantes.</small>
+        </p>
+        <p>
+            {{ form.num_answers_to_display.label_tag }}<br>
+            {{ form.num_answers_to_display }}
+            <small>Cantidad de respuestas a mostrar por pregunta.</small>
+        </p>
+        <button type="submit">Crear Cuestionario</button>
+    </form>
+
+    <a href="{% url 'learning:edit_unit' unit.id %}">Volver a edición de unidad</a>
+{% endblock %}

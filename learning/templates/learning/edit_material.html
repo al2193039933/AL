@@ -1,0 +1,12 @@
+<!-- learning/templates/learning/edit_material.html -->
+{% extends 'learning/base.html' %}
+
+{% block content %}
+    <h2>Editar material para "{{ material.learning_style.name }}" in {{ material.unit.title }}</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Actualizar Material</button>
+    </form>
+    <a href="{% url 'learning:edit_unit' material.unit.id %}">Volver a Unidad</a>
+{% endblock %}

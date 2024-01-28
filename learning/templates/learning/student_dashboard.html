@@ -1,0 +1,16 @@
+<!-- learning/templates/learning/student_dashboard.html -->
+{% extends 'learning/base.html' %}
+
+{% block content %}
+<h2>Panel de estudiante</h2>
+<p>¡Bienvenido, alumno!</p>
+
+    {% if questionnaire_completed %}
+        <!-- Muestra el boton "Tus cursos"  -->
+        <a href="{% url 'learning:student_courses' %}" class="btn btn-primary">Tus cursos</a>
+    {% else %}
+        <!-- Muestra el boton "Determina tu estilo de aprendizaje"  -->
+        <a href="{% url 'learning:learning_style_quiz' %}" class="btn btn-primary">Determina tu estilo de aprendizaje</a>
+    {% endif %}
+
+    {% endblock %}

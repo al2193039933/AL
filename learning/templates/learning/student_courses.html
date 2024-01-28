@@ -1,0 +1,20 @@
+<!-- learning/templates/learning/student_courses.html -->
+{% extends 'learning/base.html' %}
+
+{% block content %}
+    <h2>Tus cursos:</h2>
+
+    {% if courses %}
+        <ul>
+            {% for course in courses %}
+                <li>
+                    {{ course.title }}
+                    <!-- Boton para acceder al panel de cursos -->
+                    <a href="{% url 'learning:student_course_dashboard' course.id %}" class="btn btn-primary">Accede al curso</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aún no estás inscrito en ningun curso.</p>
+    {% endif %}
+{% endblock %}

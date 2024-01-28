@@ -1,0 +1,11 @@
+<!-- add_answer.html -->
+
+{% extends 'learning/base.html' %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Agrega respuesta</button>
+</form>
+{% endblock %}

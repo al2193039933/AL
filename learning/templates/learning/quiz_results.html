@@ -1,0 +1,18 @@
+{% extends 'learning/base.html' %}
+
+{% block content %}
+    <h2>Resultado de cuestionario</h2>
+    <p>Tu calificación: {{ grade }}%</p>
+    
+    {% if passed == "True" %}
+        <p>¡Felicidades! Has aprobado el cuestionario.</p>
+    {% else %}
+        <p>Lamentablemente, no has aprobado el cuestionario.</p>
+    {% endif %}
+
+    <a href="{% url 'learning:student_answer_quiz' unit_id %}" class="btn btn-primary">Reintentar cuestionario</a>
+    <a href="{% url 'learning:student_dashboard' %}">Volver al panel</a>
+
+{% endblock %}
+
+

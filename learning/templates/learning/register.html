@@ -1,0 +1,11 @@
+<!-- learning/templates/learning/register.html -->
+{% extends 'learning/base.html' %}
+
+{% block content %}
+  <h2>Registro</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Regístrate</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'learning/base.html' %}
+
+{% block content %}
+    <h2>{{ unit.title }}</h2>
+
+    <h3>Materiales de aprendizaje</h3>
+    {% if materials %}
+        <ul>
+            {% for material in materials %}
+                <li>
+                    {% if material.file %}
+                        <a href="{{ material.file.url }}" >Descarga Material</a>
+                    {% else %}
+                        No se ha subido un archivo
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay materiales para tu estilo de aprendizaje en esta unidad.</p>
+    {% endif %}
+
+    <!-- Boton para llevar al estudiante al panel donde responde el cuestionario -->
+    <a href="{% url 'learning:student_answer_quiz' unit.id %}" class="btn btn-primary">Realizar cuestionario</a>
+
+{% endblock %}

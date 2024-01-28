@@ -1,0 +1,17 @@
+<!-- learning/templates/learning/welcome.html -->
+{% extends 'learning/base.html' %}
+
+{% block content %}
+    <h2>Bienvenido a la plataforma de aprendizaje adaptativo</h2>
+    
+    {% if user.is_authenticated %}
+        <p>Bienvenido de vuelta, {{ user.username }}!</p>
+        <p><a href="{% url 'learning:dashboard_redirect' %}">Ve a tu panel</a></p>
+    {% else %}
+        <p>¡Únete a nuestra comunidad de aprendizaje!</p>
+        <div>
+            <a href="{% url 'learning:register' %}">Registra</a> |
+            <a href="{% url 'learning:login' %}">Ingresa</a>
+        </div>
+    {% endif %}
+{% endblock %}

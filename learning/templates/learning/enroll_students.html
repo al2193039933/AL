@@ -1,0 +1,26 @@
+<!-- enroll_students.html -->
+
+{% extends 'learning/base.html' %}
+
+{% block content %}
+    <h2>Inscribe alumnos a cursos: {{ course.title }}</h2>
+
+    <ul>
+        {% for student in students %}
+            <li>
+                {{ student.name }}
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="student_id" value="{{ student.id }}">
+                    {% if student.id in enrolled_students %}
+                        <button type="submit">Expulsar del curso</button>
+                    {% else %}
+                        <button type="submit">Inscribir al curso</button>
+                    {% endif %}
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'learning:edit_course' course.id %}">Volver a edición de curso</a>
+{% endblock %}

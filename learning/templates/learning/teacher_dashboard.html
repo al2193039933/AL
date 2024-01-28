@@ -1,0 +1,17 @@
+<!-- learning/templates/learning/teacher_dashboard.html -->
+{% extends 'learning/base.html' %}
+
+{% block content %}
+    <h2>Tus cursos:</h2>
+    <a href="{% url 'learning:create_course' %}">Nuevo Curso</a>  <!-- Link para crear  nuevo curso -->
+
+    <ul>
+        {% for course in courses %}
+        <li>
+            {{ course.title }} - <a href="{% url 'learning:edit_course' course.id %}">Editar</a>  <!-- Link para editar curso -->
+        </li>
+        {% empty %}
+        <li>No hay cursos disponibles.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

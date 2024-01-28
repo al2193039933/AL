@@ -1,0 +1,49 @@
+{% extends 'learning/base.html' %}
+
+{% block content %}
+<h2>Quiz: {{ quiz.title }}</h2>
+
+<!--  Formato para actualizar detalles del curso -->
+<form method="post">
+    {% csrf_token %}
+    <label for="passing_score">Puntuación mínima para aprobar (0-100):</label>
+    <input type="number" id="passing_score" name="passing_score" min="0" max="100" value="{{ quiz.passing_score }}" required>
+
+    <label for="num_questions_to_display">Número de preguntas a mostrar:</label>
+    <input type="number" id="num_questions_to_display" name="num_questions_to_display" min="1" value="{{ quiz.num_questions_to_display }}" required>
+
+    <label for="num_answers_to_display">Número de respuestas a mostrar por pregunta:</label>
+    <input type="number" id="num_answers_to_display" name="num_answers_to_display" min="1" value="{{ quiz.num_answers_to_display }}" required>
+
+    <button type="submit">Actualizar detalles del cuestionario</button>
+</form>
+
+<!-- Enlace para añadir una nueva pregunta al cuestionario -->
+<a href="{% url 'learning:add_question_to_quiz' quiz.id %}">Agrega pregunta</a>
+
+<!-- Enlista todas las preguntas del cuestionario -->
+{% for question in questions %}
+    <div class="question">
+        <p>Question: {{ question.text }}</p>
+        <!--  Muestra todas las respuestas para esta pregunta -->
+        <ul>
+            {% for answer in question.answers.all %}
+                <li>
+                    {{ answer.text }}
+                    {% if answer.is_correct %} 
+                        (Correct)
+                    {% else %}
+                        (Incorrect)
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        <!-- Enlace para añadir respuesta a la pregunta-->
+        <a href="{% url 'learning:add_answer_to_question' question.id %}">Agregar Respuesta</a>
+    </div>
+{% endfor %}
+
+<!--  Enlace para volver a la pagina de edición de unidad -->
+<a href="{% url 'learning:edit_unit' quiz.unit.id %}" class="btn btn-secondary">Volver a edición de unidad</a>
+
+{% endblock %}
